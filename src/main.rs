@@ -47,7 +47,6 @@ fn is_korean_ime() -> bool {
     let hwnd: HWND = unsafe { GetForegroundWindow() };
     let ime_hwnd: HWND = unsafe { ImmGetDefaultIMEWnd(hwnd) };
 
-    // Send a message to the IME windw
     let state = unsafe { SendMessageW(ime_hwnd, WM_IME_CONTROL, WPARAM(0x0005), LPARAM(0)) };
 
     state.0 == 1
@@ -80,7 +79,6 @@ fn change_ime_state() {
         },
     };
 
-    // 키 누름 이벤트 전송
     unsafe {
         SendInput(&[down_input], std::mem::size_of::<INPUT>() as i32);
         SendInput(&[up_input], std::mem::size_of::<INPUT>() as i32);
