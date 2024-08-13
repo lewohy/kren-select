@@ -17,7 +17,7 @@ use windows::Win32::{
 #[command(version, about, long_about = None)]
 struct Cli {
     #[arg(value_enum)]
-    mode: Mode,
+    mode: Option<Mode>,
 }
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
@@ -30,14 +30,21 @@ fn main() {
     let cli = Cli::parse();
 
     match cli.mode {
-        Mode::EN => {
+        Some(Mode::EN) => {
             if is_korean_ime() {
                 change_ime_state();
             }
         }
-        Mode::KR => {
+        Some(Mode::KR) => {
             if !is_korean_ime() {
                 change_ime_state();
+            }
+        }
+        None => {
+            if is_korean_ime() {
+                println!("kr");
+            } else {
+                println!("en");
             }
         }
     }
