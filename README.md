@@ -2,6 +2,8 @@
 
 Windows 한국어 입력기에서 한글/영어 입력을 전환해주는 툴
 
+- Time & Language > Language & region > Options > Microsoft IME 에서 Compatibility 활성화 후 사용해야합니다.
+
 ## Install
 
 ```ps1
